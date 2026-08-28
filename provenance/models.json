@@ -1,0 +1,65 @@
+{
+  "release_date": "2026-08-29",
+  "code": {
+    "source_snapshot": "/fs/scratch/PAS2221/echoch/code/Vision-OPD-vcu-beta2-h100-13703486",
+    "source_manifest_sha256": "1eed8fcd797f1a7feaa2aa5b012bb0d0faa3fbd187cc24a220cba839304891fd",
+    "verified_manifest_entries": 484,
+    "manifest_verification": "passed"
+  },
+  "training_contract": {
+    "method": "visual_counterfactual_unit_extrapolation",
+    "counterfactual_null_mode": "mean_color",
+    "counterfactual_extrapolation_beta": 4.0,
+    "teacher_image_key": "bbox_images",
+    "teacher_regularization": "frozen",
+    "teacher_update_rate": 0.0,
+    "student_image_key": "images",
+    "distillation_support": "student_top100_plus_tail",
+    "distillation_alpha": 0.5,
+    "actor_seed": 42,
+    "actor_data_loader_seed": 42,
+    "hardware": "2_nodes_x_4_h100",
+    "epochs": 2,
+    "steps": 70,
+    "save_freq": 10,
+    "train_batch_size": 96,
+    "rollout_n": 8,
+    "max_prompt_length": 8192,
+    "max_response_length": 1024,
+    "train_dataset": "yuanqianhao/Vision-OPD-6K",
+    "historical_train_parquet_sha256": "2bb335bca8a3989a4abda0ed93884e830e4420917e2c08fdd3aa1182ac41ddcd"
+  },
+  "models": {
+    "beta4_4b_ckpt40": {
+      "base_model": "Qwen/Qwen3.5-4B",
+      "selected_checkpoint": 40,
+      "huggingface_repo": "Echo23333456/Vision-OPD-Beta4-4B-ckpt40",
+      "merged_model_bytes": 10350019328,
+      "merged_model_sha256": "0932e38fb2bc3d992f14e91ed4bf28d82aac4521869c166bc25182eb75d37278",
+      "config_bytes": 2896,
+      "config_sha256": "357a7aab66c5534d713577cf15e07ebc1ad415b38d8c62f98f6d33dc7b888606"
+    },
+    "beta4_9b_ckpt30": {
+      "base_model": "Qwen/Qwen3.5-9B",
+      "historical_base_model_config_sha256": "d0883072e01861ed0b2d47be3c16c36a8e81c224c7ffaa310c6558fb3f932b05",
+      "method_change_only": "model_qwen35_4b_to_qwen35_9b",
+      "selected_checkpoint": 30,
+      "huggingface_repo": "Echo23333456/Vision-OPD-Beta4-9B-ckpt30",
+      "merged_model_bytes": 18819722392,
+      "merged_model_sha256": "7bed5430a32bdfb186c50275f5ddfa7925bc4b871e78f0a3406734e56e31dcc5",
+      "config_bytes": 2899,
+      "config_sha256": "d50e5f12e18b959900b44370b33566614f9e7fcb8615dfd9b75d775b33e7046e"
+    }
+  },
+  "evaluation_runtime": {
+    "python": "3.12",
+    "torch": "2.10.0",
+    "transformers": "5.5.0",
+    "vllm": "0.18.0",
+    "ray": "2.53.0",
+    "flashinfer_python": "0.6.6",
+    "dtype": "bfloat16",
+    "gdn_prefill_backend": "triton",
+    "VLLM_ENABLE_FLA_PACKED_RECURRENT_DECODE": "0"
+  }
+}

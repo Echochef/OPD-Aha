@@ -1,0 +1,48 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+build/
+coverage/
+*.log
+
+# Training data and runtime products
+data/
+checkpoints/
+rollouts/
+outputs/
+model_answer/
+judge/
+results/generated/
+artifacts/
+ray_results/
+
+# Model and checkpoint payloads
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.bin
+global_step_*/
+
+# Model caches and local benchmark material
+.cache/
+.huggingface/
+huggingface/
+eval/*_data/
+eval/*_images/
+eval/*_crop_images/
+eval/*.json
+eval/math/data/
+eval/math/work/
+
+# Credentials
+*.pem
+*.key
+secrets/

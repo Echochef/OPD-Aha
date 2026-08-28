@@ -1,0 +1,90 @@
+{
+  "score_unit": "fraction unless key says percentage",
+  "perception_protocol": {
+    "seed": 42,
+    "max_tokens": 8192,
+    "enable_thinking": false,
+    "judge_model": "openai/gpt-oss-120b",
+    "judge_revision": "b5c939de8f754692c1647ca79fbf85e8c1e70f8a",
+    "official_evaluator_commit": "c247139f6598a78ce0c399b0de462fffbccc304a"
+  },
+  "models": {
+    "beta4_4b_ckpt40": {
+      "perception": {
+        "pure_gpt_oss_all_rows": {
+          "vstar": {"correct": 178, "rows": 191, "accuracy": 0.9319371727748691},
+          "hrbench-4k": {"correct": 695, "rows": 800, "accuracy": 0.86875},
+          "hrbench-8k": {"correct": 666, "rows": 800, "accuracy": 0.8325},
+          "mme-realworld-cn": {"correct": 4238, "rows": 5917, "accuracy": 0.7162413385161399},
+          "mme-realworld": {"correct": 17275, "rows": 23609, "accuracy": 0.7317124825278496},
+          "zoombench": {"correct": 528, "rows": 845, "accuracy": 0.6248520710059171}
+        },
+        "rule_first_with_reused_gpt_oss": {
+          "vstar": {"correct": 179, "rows": 191, "accuracy": 0.93717277486911},
+          "hrbench-4k": {"correct": 709, "rows": 800, "accuracy": 0.88625},
+          "hrbench-8k": {"correct": 678, "rows": 800, "accuracy": 0.8475},
+          "mme-realworld-cn": {"correct": 4432, "rows": 5917, "accuracy": 0.7490282237620416},
+          "mme-realworld": {"correct": 18343, "rows": 23609, "accuracy": 0.776949468423059},
+          "zoombench": {"correct": 528, "rows": 845, "accuracy": 0.6248520710059171}
+        },
+        "native_exact": {
+          "mme-realworld-cn": {"correct": 3277, "rows": 5917, "accuracy": 0.5538279533547406},
+          "mme-realworld": {"correct": 10135, "rows": 23609, "accuracy": 0.4292854419924605},
+          "zoombench": {"correct": 75, "rows": 845, "accuracy": 0.08875739644970414}
+        }
+      },
+      "math_4096_primary_percentage": {
+        "mathvista": 80.00,
+        "mathverse": 75.66,
+        "wemath_row_accuracy": 84.66,
+        "wemath_strict_accuracy": 69.43,
+        "wemath_loose_accuracy": 81.62,
+        "mathvision": 42.43,
+        "dynamath_average": 70.64,
+        "dynamath_worst": 41.72
+      },
+      "math_selective_8192_retry_hybrid_percentage": {
+        "mathvista": 79.70,
+        "mathverse": 78.53,
+        "wemath_row_accuracy": 86.95,
+        "wemath_strict_accuracy": 72.57,
+        "wemath_loose_accuracy": 85.52,
+        "mathvision": 55.59,
+        "dynamath_average": 72.59,
+        "dynamath_worst": 44.51
+      }
+    },
+    "beta4_9b_ckpt30": {
+      "perception": {
+        "pure_gpt_oss_all_rows": {
+          "vstar": {"correct": 181, "rows": 191, "accuracy": 0.9476439790575916},
+          "hrbench-4k": {"correct": 706, "rows": 800, "accuracy": 0.8825},
+          "hrbench-8k": {"correct": 682, "rows": 800, "accuracy": 0.8525},
+          "mme-realworld-cn": {"correct": 4293, "rows": 5917, "accuracy": 0.7255365894879162},
+          "mme-realworld": {"correct": 17566, "rows": 23609, "accuracy": 0.7440382904824432},
+          "zoombench": {"correct": 515, "rows": 845, "accuracy": 0.6094674556213018}
+        },
+        "rule_first_with_reused_gpt_oss": {
+          "vstar": {"correct": 181, "rows": 191, "accuracy": 0.9476439790575916},
+          "hrbench-4k": {"correct": 716, "rows": 800, "accuracy": 0.895},
+          "hrbench-8k": {"correct": 692, "rows": 800, "accuracy": 0.865},
+          "mme-realworld-cn": {"correct": 4460, "rows": 5917, "accuracy": 0.7537603515294913},
+          "mme-realworld": {"correct": 18392, "rows": 23609, "accuracy": 0.7790249481130077},
+          "zoombench": {"correct": 515, "rows": 845, "accuracy": 0.6094674556213018}
+        },
+        "native_exact": {
+          "vstar": {"correct": 169, "rows": 191, "accuracy": 0.8848167539267016},
+          "hrbench-4k": {"correct": 594, "rows": 800, "accuracy": 0.7425},
+          "hrbench-8k": {"correct": 574, "rows": 800, "accuracy": 0.7175},
+          "mme-realworld-cn": {"correct": 3040, "rows": 5917, "accuracy": 0.5137738718945412},
+          "mme-realworld": {"correct": 12097, "rows": 23609, "accuracy": 0.512389343047143},
+          "zoombench": {"correct": 19, "rows": 845, "accuracy": 0.022485207100591716}
+        }
+      },
+      "math": {
+        "status": "not_evaluated_for_this_checkpoint",
+        "claim": null
+      }
+    }
+  }
+}
