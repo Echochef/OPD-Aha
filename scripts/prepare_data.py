@@ -13,6 +13,7 @@ This script:
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 from typing import Any
@@ -36,7 +37,10 @@ def parse_args() -> argparse.Namespace:
 
 def download_dataset(repo_id: str, data_dir: str) -> None:
     print(f"Downloading dataset from {repo_id} ...")
-    cmd = ["huggingface-cli", "download", "--repo-type", "dataset", repo_id, "--local-dir", data_dir]
+    hf_cli = shutil.which("hf") or shutil.which("huggingface-cli")
+    if hf_cli is None:
+        raise RuntimeError("Install huggingface_hub so the `hf` CLI is available")
+    cmd = [hf_cli, "download", "--repo-type", "dataset", repo_id, "--local-dir", data_dir]
     subprocess.run(cmd, check=True)
 
     images_dir = os.path.join(data_dir, "images")
