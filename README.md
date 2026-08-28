@@ -7,6 +7,8 @@ This repository contains the training, inference, and evaluation code for two se
 | Qwen3.5-4B | 40 | [Vision-OPD-Beta4-4B-ckpt40](https://huggingface.co/Echo23333456/Vision-OPD-Beta4-4B-ckpt40) |
 | Qwen3.5-9B | 30 | [Vision-OPD-Beta4-9B-ckpt30](https://huggingface.co/Echo23333456/Vision-OPD-Beta4-9B-ckpt30) |
 
+Both model repositories and the GitHub repository are private at release time.
+
 The release is derived from the exact OSU training snapshot. All 484 entries in [`source_manifest.sha256`](source_manifest.sha256) passed SHA-256 verification before portable release edits were applied. Release changes are tracked by Git.
 
 Included here:
