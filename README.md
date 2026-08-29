@@ -46,7 +46,6 @@ The repository includes:
 | `scripts/` | Data preparation, training, checkpoint merging, and serving entrypoints |
 | `eval/` | Fine-grained perception inference and scoring |
 | `eval/math/` | Mathematical reasoning inference and scoring |
-| `tests/` | Unit tests for the counterfactual target |
 
 ## 🚀 Quick Start
 
