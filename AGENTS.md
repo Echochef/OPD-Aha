@@ -2,18 +2,19 @@
 
 ## Purpose
 
-This repository is the canonical editable reproducibility release for the Vision-OPD beta=4 Qwen3.5-4B checkpoint 40 and Qwen3.5-9B checkpoint 30 models. Historical OSU source and run directories are read-only evidence.
+This repository is the canonical implementation of OPD-Aha. It contains training, inference, and
+evaluation code for fine-grained visual perception and multimodal mathematical reasoning.
 
-## Setup and verification
+## Setup and tests
 
-- Use Python 3.12 and `requirements.txt` for training and vLLM evaluation.
-- Run `bash scripts/verify_release.sh` after code or metadata changes.
-- Full training uses a Ray cluster with two nodes and four H100 GPUs per node unless a scale change is explicitly documented.
+- Use Python 3.12 and install dependencies from `requirements.txt`.
+- Run `python -m pytest -q tests/test_counterfactual_beta.py` after changing the training objective.
+- Run `python eval/math/qwen3vl_wemath_strict.py selftest` after changing the WeMath parser.
 
 ## Repository constraints
 
 - Never commit model weights, datasets, checkpoints, outputs, caches, logs, credentials, or tokens.
 - Keep generated evaluation outputs under ignored paths.
-- Preserve the beta=4 matched contract unless a change is explicitly a new experiment.
-- Do not rewrite `source_manifest.sha256`; it authenticates the pre-release OSU snapshot.
-- Back model-card claims with `results/verified_metrics.json` and `provenance/models.json`.
+- Preserve the default OPD-Aha training recipe unless a change is explicitly introduced as a new
+  experiment.
+- Keep training, inference, and evaluation commands portable; do not commit machine-specific paths.

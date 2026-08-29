@@ -1,119 +1,150 @@
-# Vision-OPD beta=4 reproducibility release
+<h1 align="center">👁️ OPD-Aha</h1>
 
-This repository contains the training, inference, and evaluation code for two selected Vision-OPD beta=4 checkpoints.
+<h3 align="center">Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation</h3>
 
-| Model | Selected checkpoint | Hugging Face |
-|---|---:|---|
-| Qwen3.5-4B | 40 | [Vision-OPD-Beta4-4B-ckpt40](https://huggingface.co/Echo23333456/Vision-OPD-Beta4-4B-ckpt40) |
-| Qwen3.5-9B | 30 | [Vision-OPD-Beta4-9B-ckpt30](https://huggingface.co/Echo23333456/Vision-OPD-Beta4-9B-ckpt30) |
+<p align="center">
+  <a href="https://huggingface.co/Echo23333456/Vision-OPD-Beta4-4B-ckpt40">
+    <img alt="Hugging Face 4B" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OPD--Aha--4B-yellow">
+  </a>
+  <a href="https://huggingface.co/Echo23333456/Vision-OPD-Beta4-9B-ckpt30">
+    <img alt="Hugging Face 9B" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OPD--Aha--9B-yellow">
+  </a>
+  <a href="https://github.com/Echochef/OPD-Aha">
+    <img alt="Code" src="https://img.shields.io/badge/Code-GitHub-black?logo=github">
+  </a>
+</p>
 
-Both model repositories and the GitHub repository are private at release time.
+<p align="center">
+  Official implementation of <b>OPD-Aha</b>, an on-policy self-distillation framework for improving
+  fine-grained visual perception and multimodal mathematical reasoning.
+</p>
 
-The release is derived from the exact OSU training snapshot. All 484 entries in [`source_manifest.sha256`](source_manifest.sha256) passed SHA-256 verification before portable release edits were applied. Release changes are tracked by Git.
+---
 
-Included here:
+## 📰 News
 
-- beta=4 on-policy self-distillation training for 4B and 9B;
-- FSDP checkpoint merge and vLLM serving code;
-- fine-grained perception preparation, inference, and three scoring paths;
-- MathVerse, MathVista, WeMath, MathVision, and DynaMath evaluation;
-- verified model hashes, training contracts, protocols, and completed scores.
+- **`2026-08-29`** &nbsp;🚀 Training, inference, and evaluation code released.
 
-See [`provenance/models.json`](provenance/models.json) and [`results/verified_metrics.json`](results/verified_metrics.json). The 9B checkpoint has verified perception results; no beta=4 9B math score is claimed. The same math pipeline can evaluate either released model.
+## 📖 Overview
 
-## Environment
+OPD-Aha trains a multimodal language model with a frozen visual teacher and a counterfactual visual
+input. The training objective emphasizes visual evidence that changes the teacher distribution while
+preserving the standard on-policy learning workflow.
 
-The exact recorded environment used Python 3.12, PyTorch 2.10.0, Transformers 5.5.0, vLLM 0.18.0, Ray 2.53.0, and FlashInfer 0.6.6.
+The repository includes:
+
+- 🏋️ multi-node training built on `verl`;
+- 📦 FSDP checkpoint merging and vLLM serving;
+- 🔍 fine-grained perception evaluation on V*Bench, HR-Bench, MME-RealWorld, and ZoomBench;
+- 🧮 mathematical reasoning evaluation on MathVista, MathVerse, WeMath, MathVision, and DynaMath.
+
+## 🗂️ Repository Layout
+
+| Path | Description |
+| --- | --- |
+| `verl/` | Distributed training and rollout implementation |
+| `scripts/` | Data preparation, training, checkpoint merging, and serving entrypoints |
+| `eval/` | Fine-grained perception inference and scoring |
+| `eval/math/` | Mathematical reasoning inference and scoring |
+| `tests/` | Unit tests for the counterfactual target |
+
+## 🚀 Quick Start
+
+### 1. Environment
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
+conda create -n opd-aha python=3.12 -y
+conda activate opd-aha
+
 pip install -r requirements.txt
 pip install -e .
 ```
 
-The original training used two nodes with four H100 GPUs per node. Within a scheduler allocation, start a Ray head on the first node and a worker on the second:
+### 2. Training data
 
-```bash
-NUM_GPUS=4 bash scripts/start_ray_head.sh
-RAY_HEAD_ADDRESS=<head-ip>:6379 NUM_GPUS=4 bash scripts/start_ray_worker.sh
-```
-
-Run training on the head after all eight GPUs appear in `ray status`.
-
-## Training data
-
-Prepare Vision-OPD-6K from `yuanqianhao/Vision-OPD-6K`:
+Prepare [Vision-OPD-6K](https://huggingface.co/datasets/yuanqianhao/Vision-OPD-6K):
 
 ```bash
 python scripts/prepare_data.py --data-dir ./data
 ```
 
-The historical OSU `train.parquet` SHA-256 is `2bb335bca8a3989a4abda0ed93884e830e4420917e2c08fdd3aa1182ac41ddcd`. Its rows contain absolute image paths, so a parquet regenerated elsewhere will have a different byte hash even with the same samples.
+## 🏋️ Training
 
-## Reproduce training
-
-Both releases use beta 4.0, mean-color counterfactual input, a frozen bbox-image teacher, student top-100 plus tail support, alpha 0.5, seed 42, global batch 96, eight rollouts, 70 steps, and checkpoints every ten steps.
-
-```bash
-# Qwen3.5-4B; select global_step_40 after evaluation
-bash scripts/train_beta4.sh 4b
-
-# Qwen3.5-9B; select global_step_30 after evaluation
-bash scripts/train_beta4.sh 9b
-```
-
-Paths and cluster dimensions are configurable:
+OPD-Aha uses Ray for multi-node training. Start the head and worker processes inside an existing
+scheduler allocation:
 
 ```bash
-TASK_TRAIN_FILE=/data/vision-opd/train.parquet \
-TRAINER_NNODES=2 TRAINER_N_GPUS_PER_NODE=4 \
-bash scripts/train_beta4.sh 4b
+# Head node
+NUM_GPUS=4 bash scripts/start_ray_head.sh
+
+# Worker node
+RAY_HEAD_ADDRESS=<head-ip>:6379 NUM_GPUS=4 bash scripts/start_ray_worker.sh
 ```
 
-Merge a saved FSDP actor checkpoint:
+Launch the 4B or 9B recipe from the head node:
 
 ```bash
-BASE_DIR=checkpoints/vcu_mean_color_frozen_beta4_step70/global_step_40 \
-bash scripts/merge_checkpoint.sh
+bash scripts/train_opd_aha.sh 4b
+bash scripts/train_opd_aha.sh 9b
 ```
 
-## Serve a checkpoint
+Paths and cluster dimensions can be supplied through environment variables:
 
 ```bash
-MODEL_PATH=Echo23333456/Vision-OPD-Beta4-4B-ckpt40 \
-SERVED_MODEL_NAME=vision-opd-beta4-4b \
-bash scripts/serve_model.sh
+TASK_TRAIN_FILE=/path/to/train.parquet \
+TRAINER_NNODES=2 \
+TRAINER_N_GPUS_PER_NODE=4 \
+  bash scripts/train_opd_aha.sh 4b
 ```
 
-The wrapper includes the completed H100 evaluation settings: Triton GDN prefill and `VLLM_ENABLE_FLA_PACKED_RECURRENT_DECODE=0`.
+Merge an FSDP actor checkpoint after training:
 
-## Fine-grained perception evaluation
+```bash
+BASE_DIR=/path/to/global_step_xx bash scripts/merge_checkpoint.sh
+```
 
-Start the released model server and a GPT-OSS-120B OpenAI-compatible judge server, then run:
+## ⚡ Inference
+
+Serve a Hugging Face or locally merged checkpoint with vLLM:
+
+```bash
+MODEL_PATH=/path/to/model \
+SERVED_MODEL_NAME=opd-aha \
+  bash scripts/serve_model.sh
+```
+
+## 📊 Evaluation
+
+### Fine-grained perception
+
+Start the model server and an OpenAI-compatible judge server, then run:
 
 ```bash
 API_BASE=http://127.0.0.1:8000/v1 \
-OPENAI_MODEL_ID=vision-opd-beta4-4b \
+OPENAI_MODEL_ID=opd-aha \
 JUDGE_API_BASE=http://127.0.0.1:8001/v1 \
 JUDGE_MODEL=openai/gpt-oss-120b \
-bash eval/run_perception_repro.sh
+  bash eval/run_perception_eval.sh
 ```
 
-The default suite is V*Bench, HRBench-4K, HRBench-8K, MME-RealWorld-CN, MME-RealWorld, and ZoomBench with seed 42, maximum response length 8192, and thinking disabled. Pure-LLM, rule-first, and native-exact judge outputs are separated. Set `BENCHMARK` to run a subset.
+Use `BENCHMARK` to select a subset of V*Bench, HR-Bench-4K, HR-Bench-8K,
+MME-RealWorld-CN, MME-RealWorld, and ZoomBench.
 
-## Math reasoning evaluation
+### Mathematical reasoning
 
-See [`eval/math/README.md`](eval/math/README.md) for the exact 4096-token protocol and commands for MathVerse MINI, MathVista MINI, WeMath testmini, MathVision testmini, and DynaMath test.
+The mathematical reasoning suite provides data preparation, sharded inference, and scoring for
+MathVerse, MathVista, WeMath, MathVision, and DynaMath. See
+[`eval/math/README.md`](eval/math/README.md) for commands.
 
-## Verification
+## 🙏 Acknowledgements
 
-```bash
-bash scripts/verify_release.sh
-```
+OPD-Aha builds on excellent open-source projects and datasets, including
+[`verl`](https://github.com/volcengine/verl),
+[`Qwen`](https://github.com/QwenLM/Qwen3-VL),
+[`vLLM`](https://github.com/vllm-project/vllm), and
+[`Vision-OPD`](https://github.com/VisionOPD/Vision-OPD).
 
-This checks shell and Python syntax, beta method tests, release metadata, and accidental secret inclusion. Full GPU training and benchmark inference remain separate long-running checks.
+## 📄 License
 
-## License
-
-Apache-2.0. Dataset and base-model licenses remain governed by their upstream repositories.
+This project is released under the Apache-2.0 License. Datasets and base models remain subject to
+their respective licenses.

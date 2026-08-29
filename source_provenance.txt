@@ -1,6 +1,0 @@
-base_commit=c8a8fdd1f88eef1b5ef4fe6a8d64eb0272917471
-patch_sha256=e4f0ecb997ce1554098a1226fb6a7b6f6a0ca1152cf5a330211e99e91e204153
-beta2_patch_sha256=c82ca9580eabb4b2f9efc70bb74f447ee7c747e1e4ab84d8a3e38837680ca312
-counterfactual_extrapolation_beta=2.0
-source_worktree=/fs/scratch/PAS2221/echoch/code/Vision-OPD-visual-counterfactual-unit-c8a8fdd1-h100-13703486
-source_branch=ablation/visual-counterfactual-unit-frozen-teacher

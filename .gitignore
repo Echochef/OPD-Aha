@@ -19,7 +19,7 @@ rollouts/
 outputs/
 model_answer/
 judge/
-results/generated/
+results/
 artifacts/
 ray_results/
 

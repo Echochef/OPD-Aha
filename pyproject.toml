@@ -15,7 +15,7 @@ build-backend = "setuptools.build_meta"
 name = "verl"
 dynamic = ["version"]
 
-description = "Vision-OPD: Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation"
+description = "OPD-Aha: Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation"
 license = {text = "Apache-2.0"}
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
