@@ -1,6 +1,4 @@
-<h1 align="center">OPD-Aha</h1>
-
-<h3 align="center">Learning to See Fine Details for Multimodal LLMs<br>via On-Policy Self-Distillation</h3>
+<h1 align="center">OPD-Aha: Rescuing Multimodal Distillation from Linguistic Momentum by Triggering Visual Reflection</h1>
 
 <p align="center">
   Official implementation of <b>OPD-Aha</b> for fine-grained visual perception<br>
