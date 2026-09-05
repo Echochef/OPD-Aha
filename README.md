@@ -3,12 +3,6 @@
 <h3 align="center">Learning to See Fine Details for Multimodal LLMs via On-Policy Self-Distillation</h3>
 
 <p align="center">
-  <a href="https://huggingface.co/Echo23333456/OPD-Aha-4B">
-    <img alt="Hugging Face 4B" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OPD--Aha--4B-yellow">
-  </a>
-  <a href="https://huggingface.co/Echo23333456/OPD-Aha-9B">
-    <img alt="Hugging Face 9B" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-OPD--Aha--9B-yellow">
-  </a>
   <a href="https://github.com/Echochef/OPD-Aha">
     <img alt="Code" src="https://img.shields.io/badge/Code-GitHub-black?logo=github">
   </a>
