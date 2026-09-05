@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="assets/opd-aha-header.svg" alt="OPD-Aha — Fine-grained visual perception" width="960">
-</p>
+<h1 align="center">OPD-Aha</h1>
 
 <h3 align="center">Learning to See Fine Details for Multimodal LLMs<br>via On-Policy Self-Distillation</h3>
 
