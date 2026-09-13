@@ -1,4 +1,4 @@
-<h1 align="center">OPD-Aha: Rescuing Multimodal Distillation from Linguistic Momentum by Triggering Visual Reflection</h1>
+<h1 align="center">OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation</h1>
 
 <p align="center">
   Official implementation of <b>OPD-Aha</b> for fine-grained visual perception<br>
@@ -6,12 +6,15 @@
 </p>
 
 <p align="center">
+  <a href="https://huggingface.co/CewEhao/OPD-Aha-4B"><img src="https://img.shields.io/badge/Hugging_Face-OPD--Aha--4B-FFD21E?style=flat-square&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face: OPD-Aha-4B"></a>
+  <a href="https://huggingface.co/CewEhao/OPD-Aha-9B"><img src="https://img.shields.io/badge/Hugging_Face-OPD--Aha--9B-FFD21E?style=flat-square&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face: OPD-Aha-9B"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Quick_Start-0F766E?style=flat-square&amp;logo=terminal&amp;logoColor=white" alt="Quick Start"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-334155?style=flat-square" alt="License: Apache 2.0"></a>
 </p>
 
 <p align="center">
   <a href="#overview">Overview</a> &nbsp; / &nbsp;
+  <a href="#models">Models</a> &nbsp; / &nbsp;
   <a href="#training">Training</a> &nbsp; / &nbsp;
   <a href="#inference">Inference</a> &nbsp; / &nbsp;
   <a href="#evaluation">Evaluation</a>
@@ -35,6 +38,15 @@ The repository includes:
 - FSDP checkpoint merging and vLLM serving;
 - fine-grained perception evaluation on V*Bench, HR-Bench, MME-RealWorld, and ZoomBench;
 - mathematical reasoning evaluation on MathVista, MathVerse, WeMath, MathVision, and DynaMath.
+
+## Models
+
+The released checkpoints are available on 🤗 Hugging Face:
+
+| Model | Base model | Download |
+| --- | --- | --- |
+| OPD-Aha-4B | Qwen3.5-4B | [🤗 Hugging Face](https://huggingface.co/CewEhao/OPD-Aha-4B) |
+| OPD-Aha-9B | Qwen3.5-9B | [🤗 Hugging Face](https://huggingface.co/CewEhao/OPD-Aha-9B) |
 
 ## Repository Layout
 
