@@ -6,6 +6,7 @@
 </p>
 
 <p align="center">
+  <a href="https://arxiv.org/pdf/2609.16459"><img src="https://img.shields.io/badge/arXiv-2609.16459-B31B1B?style=flat-square&amp;logo=arxiv&amp;logoColor=white" alt="Paper: arXiv 2609.16459"></a>
   <a href="https://huggingface.co/CewEhao/OPD-Aha-4B"><img src="https://img.shields.io/badge/Hugging_Face-OPD--Aha--4B-FFD21E?style=flat-square&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face: OPD-Aha-4B"></a>
   <a href="https://huggingface.co/CewEhao/OPD-Aha-9B"><img src="https://img.shields.io/badge/Hugging_Face-OPD--Aha--9B-FFD21E?style=flat-square&amp;logo=huggingface&amp;logoColor=black" alt="Hugging Face: OPD-Aha-9B"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Quick_Start-0F766E?style=flat-square&amp;logo=terminal&amp;logoColor=white" alt="Quick Start"></a>
@@ -144,6 +145,22 @@ MME-RealWorld-CN, MME-RealWorld, and ZoomBench.
 The mathematical reasoning suite provides data preparation, sharded inference, and scoring for
 MathVerse, MathVista, WeMath, MathVision, and DynaMath. See
 [`eval/math/README.md`](eval/math/README.md) for commands.
+
+## Citation
+
+If you find this work useful, please cite our [paper](https://arxiv.org/abs/2609.16459):
+
+```bibtex
+@misc{qiu2026opdaha,
+  title         = {{OPD-Aha}: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation},
+  author        = {Chenhao Qiu and Dawei Li and Yechao Zhang and Lei Gong and Zhen Tan},
+  year          = {2026},
+  eprint        = {2609.16459},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2609.16459}
+}
+```
 
 ## Acknowledgements
 
